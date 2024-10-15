@@ -1,0 +1,82 @@
+html,
+body {
+    height: 100vh;
+    margin: 0;
+    font-size: 20px;
+    background-color: rgb(200, 255, 170);
+}
+
+h1 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+h2 {
+    margin-left: 2rem;
+}
+
+h3 {
+    margin-left: 1rem;
+}
+
+.divFiltres {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+.titreFiltre {
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+
+.tableFiltres {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.filtreEnCours {
+    background: rgb(255, 230, 180);
+    border-radius: 5px;
+}
+
+.classeTache {
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    max-width: 30rem;
+    background: rgb(255, 240, 200);
+}
+
+.divAjoutTache {
+    display: flex;
+    flex-direction: column;
+    max-width: 30rem;
+}
+
+.formAjoutTache {
+    display: flex;
+    flex-direction: column;
+}
+
+.ajouterTache {
+    width: 5rem;
+}
+
+
+.tacheTerminee {
+    font-style: italic;
+}
+
+.tacheTerminee article {
+    background: rgb(180, 250, 150);
+    text-decoration: line-through;
+}
+
+.masque {
+    display: none;
+}

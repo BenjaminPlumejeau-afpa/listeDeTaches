@@ -13,6 +13,52 @@
 
     <div class="container">
         <h1>Ma liste de tâches</h1>
+
+        <div class="divListeTaches">
+            <h2>Mes tâches</h2>
+
+            <div class="divFiltres">
+                <h3 class="titreFiltre">Filtres : </h3>
+
+                <table class="tableFiltres">
+                    <tr>
+                        <td>
+                            <button id="filtreTout" class="filtreEnCours">Tout</button>
+                        </td>
+                        <td>
+                            <button id="filtreNonTerminee">Non terminées</button>
+                        </td>
+                        <td>
+                            <button id="filtreTerminee">Terminées</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <ul id="listeTaches">
+                <li>
+                    <article class="classeTache">
+                        <h3 class="titreTache">Titre de la tache</h3>
+                        <p class="texteTache">Contenu de la tache</p>
+                        <div class="gestionTache">
+                            <button name="terminer">Terminer</button>
+                            <button name="supprimer">Supprimer</button>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="divAjoutTache">
+            <h2>Nouvelle Tâche</h2>
+
+            <form action="" class="formAjoutTache">
+                <input type="text" id="titreNouvelleTache" placeholder="Titre de la tâche">
+                <textarea id="contenuNouvelleTache" placeholder="Détail de la tâche"></textarea>
+                <button id="ajouterTache">Ajouter</button>
+            </form>
+        </div>
     </div>
 
 </body>
