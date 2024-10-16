@@ -5,6 +5,7 @@ const boutonAjouter = document.getElementById("ajouterTache");
 const boutonFiltreTout = document.getElementById("filtreTout");
 const boutonFiltreTerminee = document.getElementById("filtreTerminee");
 const boutonFiltreNonTerminee = document.getElementById("filtreNonTerminee");
+const boutonSauvegarder = document.getElementById("sauvegarder");
 
 //  -- Fonction --  
 
@@ -17,15 +18,14 @@ function ajouterTache() {
                         <h3 class="titreTache">${inputTitreNouvelleTache.value}</h3>
                         <p class="texteTache">${inputContenuNouvelleTache.value}</p>
                         <div class="gestionTache">
-                            <button>Terminer</button>
-                            <button>Supprimer</button>
+                            <button type="button" name="terminer">Terminer</button>
+                            <button type="button" name="supprimer">Supprimer</button>
                         </div>
                     </article>
     `;
     inputTitreNouvelleTache.value = "";
     inputContenuNouvelleTache.value = "";
 }
-
 // fonction supprimmant la tache séléctionnéé
 function supprimerTache(event) {
     // Vérifie si on à bien cliqué sur le bon bouton
@@ -85,6 +85,21 @@ function afficheNonTerminees() {
     });
 }
 
+// fonction sauvegardant les tâches dans le localStorage
+function sauvegarderTaches(){
+    let svg = JSON.stringify(listeTaches.innerHTML);
+    localStorage.setItem("sauvegardeTaches",svg);
+}
+
+// chargement des données sauvegardées
+function chargerTaches(){
+    let tabCharg = JSON.parse(localStorage.getItem("sauvegardeTaches"));
+    listeTaches.innerHTML = tabCharg;
+}
+
+
+// On charge les données au lancement/refresh de la page
+chargerTaches();
 
 
 //  -- Ecouteurs d'événements --
@@ -105,3 +120,4 @@ boutonFiltreTerminee.addEventListener("click", afficheTerminees);
 boutonFiltreNonTerminee.addEventListener("click", afficheNonTerminees);
 
 // sauvegarde dans le localSorage du navigateur
+boutonSauvegarder.addEventListener("click", sauvegarderTaches);

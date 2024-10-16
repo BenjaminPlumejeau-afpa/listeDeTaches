@@ -23,29 +23,20 @@
                 <table class="tableFiltres">
                     <tr>
                         <td>
-                            <button id="filtreTout" class="filtreEnCours">Tout</button>
+                            <button type="button" id="filtreTout" class="filtreEnCours">Tout</button>
                         </td>
                         <td>
-                            <button id="filtreNonTerminee">Non terminées</button>
+                            <button type="button" id="filtreNonTerminee">Non terminées</button>
                         </td>
                         <td>
-                            <button id="filtreTerminee">Terminées</button>
+                            <button type="button" id="filtreTerminee">Terminées</button>
                         </td>
                     </tr>
                 </table>
             </div>
 
             <ul id="listeTaches">
-                <li>
-                    <article class="classeTache">
-                        <h3 class="titreTache">Titre de la tache</h3>
-                        <p class="texteTache">Contenu de la tache</p>
-                        <div class="gestionTache">
-                            <button name="terminer">Terminer</button>
-                            <button name="supprimer">Supprimer</button>
-                        </div>
-                    </article>
-                </li>
+
             </ul>
 
         </div>
@@ -56,10 +47,12 @@
             <form action="" class="formAjoutTache">
                 <input type="text" id="titreNouvelleTache" placeholder="Titre de la tâche">
                 <textarea id="contenuNouvelleTache" placeholder="Détail de la tâche"></textarea>
-                <button id="ajouterTache">Ajouter</button>
+                <button type="button" id="ajouterTache">Ajouter</button>
             </form>
         </div>
     </div>
+
+    <button type="button" id="sauvegarder">Sauvegarder</button>
 
 </body>
 
