@@ -5,7 +5,7 @@ const boutonAjouter = document.getElementById("ajouterTache");
 const boutonFiltreTout = document.getElementById("filtreTout");
 const boutonFiltreTerminee = document.getElementById("filtreTerminee");
 const boutonFiltreNonTerminee = document.getElementById("filtreNonTerminee");
-const boutonSauvegarder = document.getElementById("sauvegarder");
+let sauvegardeTaches = [];
 
 //  -- Fonction --  
 
@@ -25,7 +25,9 @@ function ajouterTache() {
     `;
     inputTitreNouvelleTache.value = "";
     inputContenuNouvelleTache.value = "";
+    sauvegarderTaches();
 }
+
 // fonction supprimmant la tache séléctionnéé
 function supprimerTache(event) {
     // Vérifie si on à bien cliqué sur le bon bouton
@@ -33,6 +35,7 @@ function supprimerTache(event) {
         // Si oui, on supprime tout le Li parent
         listeTaches.removeChild(event.target.parentElement.parentElement.parentElement);
     }
+    sauvegarderTaches();
 }
 
 // fonction terminant la tache séléctionnéé
@@ -42,6 +45,7 @@ function terminerTache(event) {
         // Si oui, on ajoute la classe de tache terminée a tout le Li parent pour changer l'apparence
         event.target.parentElement.parentElement.parentElement.classList.add("tacheTerminee");
     }
+    sauvegarderTaches();
 }
 
 // fonction de tri affichant toutes les taches
@@ -86,15 +90,50 @@ function afficheNonTerminees() {
 }
 
 // fonction sauvegardant les tâches dans le localStorage
-function sauvegarderTaches(){
+function sauvegarderTaches() {
+    sauvegardeTaches = [];
+    listeTaches.childNodes.forEach(element => {
+        if (element.nodeName === "LI") {
+            let sauvTitre = element.childNodes[1].childNodes[1].textContent;
+            let sauvContenu = element.childNodes[1].childNodes[3].textContent;
+            let sauvStatut = element.classList.contains("tacheTerminee");
+            sauvegardeTaches.push({ titre: sauvTitre, contenu: sauvContenu, termine: sauvStatut });
+        }
+    });
+    let donneesSauvegarde = JSON.stringify(sauvegardeTaches);
+    localStorage.setItem("sauvegardeTaches", donneesSauvegarde);
+    /*
     let svg = JSON.stringify(listeTaches.innerHTML);
-    localStorage.setItem("sauvegardeTaches",svg);
+    */
 }
 
 // chargement des données sauvegardées
-function chargerTaches(){
+function chargerTaches() {
+    // récupération des données du local storage
+    sauvegardeTaches = JSON.parse(localStorage.getItem("sauvegardeTaches"));
+    console.log(sauvegardeTaches);
+    //affichage des taches récupérées
+    sauvegardeTaches.forEach(element => {
+        const newLi = document.createElement("li");
+        listeTaches.appendChild(newLi);
+        newLi.innerHTML = `
+                        <article class="classeTache">
+                            <h3 class="titreTache">${element.titre}</h3>
+                            <p class="texteTache">${element.contenu}</p>
+                            <div class="gestionTache">
+                                <button type="button" name="terminer">Terminer</button>
+                                <button type="button" name="supprimer">Supprimer</button>
+                            </div>
+                        </article>
+        `;
+        if(element.termine){
+            newLi.classList.add("tacheTerminee");
+        }
+    });
+    /*
     let tabCharg = JSON.parse(localStorage.getItem("sauvegardeTaches"));
     listeTaches.innerHTML = tabCharg;
+    */
 }
 
 
@@ -118,6 +157,3 @@ listeTaches.addEventListener("click", terminerTache);
 boutonFiltreTout.addEventListener("click", afficheTout);
 boutonFiltreTerminee.addEventListener("click", afficheTerminees);
 boutonFiltreNonTerminee.addEventListener("click", afficheNonTerminees);
-
-// sauvegarde dans le localSorage du navigateur
-boutonSauvegarder.addEventListener("click", sauvegarderTaches);
